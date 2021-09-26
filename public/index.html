@@ -1,0 +1,38 @@
+<html>
+<head>
+  <title>Send SMS via Twilio Code Project</title>
+  <script>
+    var source = new EventSource("../Updates");
+    source.onmessage = function(event) {
+      var data = JSON.parse(event.data);
+      var inputCell= document.getElementById("input");
+      inputCell.innerHTML = JSON.stringify(data) + '<br />'+ inputCell.innerHTML; 
+    };//onMessage
+  </script>
+  <link rel="stylesheet" href="style.css">    
+</head>
+
+<body>
+  <form action="/SubmitForm" method="POST">
+    <fieldset>
+      <legend>Send SMS</legend>
+
+      <label for="SMSTo">SMS To:</label>
+      <input type="text" name="SMSTo" id="SMSTo" required pattern="\+614[0-9]{8}$">
+      <br><br>
+      <label for="SMSBody">SMS Body:</label>
+      <textarea name="SMSBody" id="SMSBody" required></textarea>
+      <br><br>
+      <label for="SMSCallBack">SMS Callback URL:</label>
+      <input type="text" name="SMSCallBack" id="SMSCallBack" required>
+      <br><br>
+      <button type="Submit">Send SMS</button>
+    </fieldset>
+  </form>
+<br/>
+<p>SMS Log:</p>
+<br/>
+<div id="input">
+</div>
+</body>
+</html>
